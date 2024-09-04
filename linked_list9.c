@@ -1,3 +1,4 @@
+// Delete the element at the ending
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct node{
@@ -11,52 +12,12 @@ void insertBegin(node **head, int data){
     newnode->link = *head;
     *head = newnode;
 }
-node* maxNode(node **head){
-    int max;
-    node *ptr,*temp;
-    ptr = NULL;
-    if(*head == NULL){
-        printf("List is empty.\n");
-        return NULL;
-    }
-    else{
-        ptr = *head;
-        max = ptr->data;
-        ptr = ptr->link;
-        while(ptr!=NULL){
-            if(ptr->data>max){
-                max = ptr->data;
-                temp = ptr; 
-            }
-            ptr = ptr->link;
-        }
-        return temp;
-    } 
-}
 void displayList(node *head){
     while(head!=NULL){
         printf("%d -> ",head->data);
         head = head->link;
     }
     printf("NULL\n");
-}
-void sortingList(node **head){
-    node *current, *next;
-    current = *head;
-    int max,temp;
-    while(current!=NULL){
-        max = current->data;
-        next = current->link;
-        while(next!=NULL){
-            if(current->data>next->data){
-                temp = current->data;
-                current->data = next->data;
-                current->data = temp; 
-            }
-            next = next->link;
-        }
-        current = current->link;
-    }
 }
 int deleteEnd(node **head){
     node *temp;
