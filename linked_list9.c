@@ -58,27 +58,61 @@ void sortingList(node **head){
         current = current->link;
     }
 }
+int deleteEnd(node **head){
+    node *temp;
+    if(*head==NULL){
+        printf("NULL list. Delection is not possible.\n");
+        return 0;
+    }
+    else{
+        temp = *head;
+        if(temp->link==NULL){
+            *head = NULL;
+            free(temp);
+        }
+        else{
+            while(temp->link->link!=NULL){
+                temp = temp->link;
+            }
+            free(temp->link);
+            temp->link = NULL;
+        }
+        printf("Successfully deleted the last node.\n");
+    }
+}
 int main(){
     node *head = NULL;
-    int n,i,data;
-    printf("Enter the number of elements: ");
-    scanf("%d",&n);
-    for(i=0;i<n;i++){
-        printf("Enter the element %d: ",i+1);
-        scanf("%d",&data);
-        insertBegin(&head,data);
+    int ch,n,i,data;
+    printf("MAIN MENU\n");
+    printf("-------------------\n");
+    printf("1. Insert at the beginning\n");
+    printf("2. Delete at the ending\n");
+    printf("3. Display the list\n");
+    printf("4. Exit\n");
+    printf("-------------------\n");
+    while(1){
+        printf("Enter any operation: ");
+        scanf("%d",&ch);
+        switch(ch){
+            case 1:
+                printf("Enter the element to insert: ");
+                scanf("%d",&data);
+                insertBegin(&head,data);
+                break;
+            case 2:
+                deleteEnd(&head);
+                break;
+            case 3:
+                printf("The list: ");
+                displayList(head);
+                break;
+            case 4:
+                printf("Exiting...\n");
+                return 0;
+            default:
+                printf("Invalid operation. Please try again.\n");
+        }
     }
-    printf("The list before sorting: ");
-    displayList(head);
-
-    node *max = maxNode(&head);
-    if(max!=NULL)
-        printf("Maximum value of the node: %d\n",max->data);
-
-    sortingList(&head);
-
-    printf("The list after After sorting: ");
-    displayList(head);
     
     node *temp;
     while(head!=NULL){
