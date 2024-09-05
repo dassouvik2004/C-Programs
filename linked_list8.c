@@ -62,7 +62,7 @@ void sortingList(node **head){
 void deleteBegin(node **head){
     node *temp;
     if(*head==NULL)
-        puts("NULL list. Delection is not possible.\n");
+        puts("NULL list. Deletion is not possible.\n");
     else{
         temp = *head;
         *head = temp->link;

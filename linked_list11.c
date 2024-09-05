@@ -1,4 +1,4 @@
-// Delete the element at the ending
+// Delete the element at any position
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct node{
@@ -19,40 +19,26 @@ void displayList(node *head){
     }
     printf("NULL\n");
 }
-int deleteEnd(node **head){
-    node *temp;
-    if(*head==NULL){
-        printf("NULL list. Deletion is not possible.\n");
-        return 0;
-    }
-    else{
-        temp = *head;
-        if(temp->link==NULL){
-            *head = NULL;
-            free(temp);
-        }
-        else{
-            while(temp->link->link!=NULL){
-                temp = temp->link;
-            }
-            free(temp->link);
-            temp->link = NULL;
-        }
-        printf("Successfully deleted the last node.\n");
+void display_rev(node *head){
+    node *ptr;
+    if(head!=NULL){
+        ptr = head;
+        display_rev(head->link);
+        printf("%d ",ptr->data);
     }
 }
 int main(){
     node *head = NULL;
-    int ch,n,i,data;
+    int ch,n,i,data,val;
     printf("MAIN MENU\n");
     printf("-------------------\n");
     printf("1. Insert at the beginning\n");
-    printf("2. Delete at the ending\n");
-    printf("3. Display the list\n");
+    printf("2. Display the list\n");
+    printf("3. Display the list in reverse order using recursion.\n");
     printf("4. Exit\n");
     printf("-------------------\n");
     while(1){
-        printf("Enter any operation: ");
+        printf("\nEnter any operation: ");
         scanf("%d",&ch);
         switch(ch){
             case 1:
@@ -61,11 +47,10 @@ int main(){
                 insertBegin(&head,data);
                 break;
             case 2:
-                deleteEnd(&head);
+                displayList(head);
                 break;
             case 3:
-                printf("The list: ");
-                displayList(head);
+                display_rev(head);
                 break;
             case 4:
                 printf("Exiting...\n");

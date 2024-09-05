@@ -1,4 +1,4 @@
-// Delete the element at the ending
+// Delete the element at any position
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct node{
@@ -19,35 +19,43 @@ void displayList(node *head){
     }
     printf("NULL\n");
 }
-int deleteEnd(node **head){
-    node *temp;
+void delete_Any(node **head,int val){
+    node *ptr,*prev;
+    ptr = *head;
     if(*head==NULL){
-        printf("NULL list. Deletion is not possible.\n");
-        return 0;
+        puts("NULL node. Delection isn't possible.\n");
     }
     else{
-        temp = *head;
-        if(temp->link==NULL){
-            *head = NULL;
-            free(temp);
+        if(ptr->data==val){
+            *head = ptr->link;
+            free(ptr);
         }
         else{
-            while(temp->link->link!=NULL){
-                temp = temp->link;
+            prev = ptr;
+            ptr = ptr->link;
+            while(ptr!=NULL){
+                if(ptr->data==val)
+                    break;
+                prev = ptr;
+                ptr = ptr->link;
             }
-            free(temp->link);
-            temp->link = NULL;
+            if(ptr==NULL)
+                puts("Node not found");
+            else{
+                prev->link = ptr->link;
+                free(ptr);
+                printf("Successfully deleted the value from the list.\n");
+            }
         }
-        printf("Successfully deleted the last node.\n");
     }
 }
 int main(){
     node *head = NULL;
-    int ch,n,i,data;
+    int ch,n,i,data,val;
     printf("MAIN MENU\n");
     printf("-------------------\n");
     printf("1. Insert at the beginning\n");
-    printf("2. Delete at the ending\n");
+    printf("2. Delete the value at any position\n");
     printf("3. Display the list\n");
     printf("4. Exit\n");
     printf("-------------------\n");
@@ -61,10 +69,11 @@ int main(){
                 insertBegin(&head,data);
                 break;
             case 2:
-                deleteEnd(&head);
+                printf("Enter the value to delete: ");
+                scanf("%d",&val);
+                delete_Any(&head,val);
                 break;
             case 3:
-                printf("The list: ");
                 displayList(head);
                 break;
             case 4:
