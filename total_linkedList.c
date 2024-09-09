@@ -133,11 +133,91 @@ int sortingList(node **head){
         }
     }
 }
+void deleteBegin(node **head){
+    node *ptr;
+    if(*head==NULL)
+        puts("NULL node.Deletion is not possible.\n");
+    else{
+        ptr = *head;
+        *head = ptr->link;
+        free(ptr);
+        printf("Successfully deleted the first element of the node.\n");
+    }
+}
+void deleteEnd(node **head) {
+    node *ptr, *prev;
+    if (*head == NULL) {
+        puts("List is empty. Deletion is not possible.\n");
+        return;
+    }
+    ptr = *head;
+    if (ptr->link == NULL) {
+        free(ptr);
+        *head = NULL;
+        printf("Successfully deleted the only element of the list.\n");
+        return;
+    }
+    while (ptr->link->link != NULL) {
+        ptr = ptr->link;
+    }
+
+    free(ptr->link); 
+    ptr->link = NULL;
+
+    printf("Successfully deleted the last element of the list.\n");
+}
+void deleteAny(node **head,int data){
+    node *prev,*cur,*next;
+    cur = *head;
+    if(*head==NULL)
+        puts("NULL node. Deletion is not possible.\n");
+    else{
+        if(cur->data==data){
+            *head = cur->link;
+            free(cur);
+        }
+        else{
+            prev = cur;
+            cur = cur->link;
+            while(cur!=NULL){
+                if(cur->data==data)
+                    break;
+                prev = cur;
+                cur = cur->link;
+            }
+            if(cur==NULL)
+                puts("Data is not found in the list.");
+            else{
+                prev->link = cur->link;
+                free(cur);
+            }
+        }
+    }
+}
+void display_rev(node *head){
+    node *ptr;
+    if(head!=NULL){
+        ptr = head;
+        display_rev(head->link);
+        printf("%d ",ptr->data);
+    }
+}
+void physically_rev(node **head){
+    node *prev = NULL, *cur = *head, *next = NULL;
+    while(cur!=NULL){
+        next = cur->link;
+        cur->link = prev;
+        prev = cur;
+        cur = next;
+    }
+    *head = prev;
+    printf("Reversing is completed in physically.\n");
+}
 int main(){
     node *head = NULL;
     int ch,data,posn;
-    printf("MAIN MENU\n");
-    printf("-----------------\n");
+    printf("|MAIN MENU|\n");
+    printf("---------------------------------------------------\n");
     printf("1. Insert element at the beginning\n");
     printf("2. Insert element at the ending\n");
     printf("3. Insert element at the n-th position\n");
@@ -146,7 +226,13 @@ int main(){
     printf("6. Find the maximum data\n");
     printf("7. Sum of the data in the list\n");
     printf("8. Sorting the linked list.\n");
-    printf("9. Exit\n");
+    printf("9. Delete element at the beginning\n");
+    printf("10. Delete element at the ending.\n");
+    printf("11. Delete element from any position.\n");
+    printf("12. Display the list in reverse order using recursion.\n");
+    printf("13. Reverse display the linked list\n");
+    printf("14. Exit\n");
+    printf("---------------------------------------------------\n");
     while(1){
         printf("Enter the operation: ");
         scanf("%d",&ch);
@@ -191,6 +277,24 @@ int main(){
                 displayList(head);
                 break;
             case 9:
+                deleteBegin(&head);
+                break;
+            case 10:
+                deleteEnd(&head);
+                break;
+            case 11:
+                printf("Enter the value to delete: ");
+                scanf("%d",&data);
+                deleteAny(&head,data);
+                break;
+            case 12:
+                display_rev(head);
+                printf("\n");
+                break;
+            case 13:
+                physically_rev(&head);
+                break;
+            case 14:
                 printf("Exiting...\n");
                 return 0;
             default:

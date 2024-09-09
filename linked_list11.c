@@ -1,4 +1,4 @@
-// Delete the element at any position
+// Reversing the linked list using recursion function
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct node{

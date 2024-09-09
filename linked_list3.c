@@ -18,7 +18,7 @@ void insert_nth(node **head,int data,int posn){
     else{
         while(i<=posn-2 && ptr->link!=NULL){ 
             ptr = ptr->link; 
-            i++
+            i++;
         }
         temp->link = ptr->link;
         ptr->link = temp;
