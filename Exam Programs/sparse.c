@@ -25,6 +25,7 @@ int Original2Sparse(int a[30][30],int rw,int col,int b[][3]){
                 b[k][1] = j;
                 b[k][2] = a[i][j];
                 k++;
+              
                 c++;
             }
         }
