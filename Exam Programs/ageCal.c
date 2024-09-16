@@ -1,52 +1,35 @@
 #include <stdio.h>
-#include <string.h>
-
-typedef struct student {
-    int roll;
-    int marks;
-    char name[30];
-} stu;
-
-int main() {
-    stu s[30];
-    int n, max, i, j;
-    
-    // Input the number of students
-    printf("Enter the number of students: ");
-    scanf("%d", &n);
-    
-    for(i = 0; i < n; i++) {
-        // Input roll number
-        printf("Enter roll: ");
-        scanf("%d", &s[i].roll);
-        
-        // Clear the input buffer after reading roll number
-        getchar();  // This will consume the newline character left by scanf
-        
-        // Input student name
-        printf("Enter name: ");
-        fgets(s[i].name, 30, stdin);
-        s[i].name[strcspn(s[i].name, "\n")] = '\0';  // Remove newline character
-        
-        // Input total marks
-        printf("Enter total marks: ");
-        scanf("%d", &s[i].marks);
-    }
-    
-    // Find the student with the highest marks
-    max = s[0].marks;
-    j = 0;
-    
-    for(i = 1; i < n; i++) {
-        if(s[i].marks > max) {
-            max = s[i].marks;
-            j = i;
-        }
-    }
-    
-    // Print the student with the highest marks
-    printf("Highest marks: %d\n", max);
-    printf("Name of the student: %s\n", s[j].name);
-    
-    return 0;
+typedef struct Date{
+	int dd;
+	int mm;
+	int yy;
+}date;
+date calcAge(date d1, date d2){
+	date temp;
+	if(d1.dd>=d2.dd)
+		temp.dd = d1.dd - d2.dd;
+	else{
+		temp.dd = d1.dd + 30 - d2.dd;
+		d1.mm--;
+	}
+	if(d1.mm>=d2.mm)
+		temp.mm = d1.mm - d2.mm;
+	else{
+		temp.mm = d1.mm + 12 - d2.mm;
+		d1.yy--;
+	}
+	temp.yy = d1.yy - d2.yy;
+	
+	return temp;
+}
+int main(){
+	date cur,dob,age;
+	printf("Enter your date of birth(dd/mm/yyyy): ");
+	scanf("%d/%d/%d",&dob.dd,&dob.mm,&dob.yy);
+	printf("Enter the current date(dd/mm/yyyy): ");
+	scanf("%d/%d/%d",&cur.dd,&cur.mm,&cur.yy);
+	age = calcAge(cur,dob);
+	printf("Your age is %d years %d months and %d days.",age.yy,age.mm,age.dd);
+	
+	return 0;
 }
