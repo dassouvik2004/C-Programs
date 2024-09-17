@@ -18,8 +18,8 @@ void insertEnd(node **head,int data){
         while(ptr->link!=*head)
             ptr = ptr->link;
         
-        newnode->link = *head;
         ptr->link = newnode;
+        newnode->link = *head;
     }
 }
 void displayList(node *head){

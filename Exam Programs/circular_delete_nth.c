@@ -1,4 +1,4 @@
-// Deleting element at the certain position in the circular linked list
+// Deleting element at the ending in the circular linked list
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct Node{
@@ -23,7 +23,7 @@ void insertBeg(node **head,int data){
         *head = newnode;
     }
 }
-void deleteEnd(node **head){
+void delete_nth(node **head,int posn){
     node *ptr;
     if(*head==NULL){
         puts("NULL node. Deletion is not possible.");
@@ -31,21 +31,39 @@ void deleteEnd(node **head){
     }
     else{
         ptr = *head;
-        if(ptr->link==ptr){
-            *head = NULL;
-            free(ptr);
-            printf("Deleting element at the ending of the list.\n");
-            return;
+        if(posn==1){
+            if(ptr->link==ptr){
+                *head = NULL;
+                free(ptr);
+            }
+            else{
+                while(ptr->link!=*head)
+                    ptr = ptr->link;
+                
+                ptr->link = (*head)->link;
+                free(*head);
+                *head = ptr->link;
+            }
         }
         else{
-            while(ptr->link->link!=*head)
+            int i = 1;
+            node *temp;
+            while(i<=posn-2 && ptr->link!=*head){
                 ptr = ptr->link;
-            
-            free(ptr->link);
-            ptr->link = *head;
-            printf("Deleting element at the ending of the list.\n");
+                i++;
+            }
+            if(ptr->link==*head){
+                puts("Out of range. Please enter a valid position\n");
+                return;
+            }
+            else{
+                temp = ptr->link;
+                ptr->link = temp->link;
+                free(temp); 
+            }
         }
     }
+    printf("Successfully deleted the data from the list.\n");
 }
 void displayList(node *head){
     if(head==NULL){
@@ -53,8 +71,8 @@ void displayList(node *head){
         return;
     }
     node *ptr = head;
+    printf("The list: ");
     do{
-        printf("The list: ");
         printf("%d -> ",ptr->data);
         ptr = ptr->link;
     }while(ptr!=head);
@@ -63,9 +81,9 @@ void displayList(node *head){
 }
 int main(){
     node *head = NULL;
-    int ch,data;
+    int ch,data,posn;
     printf("1. Insert at the beginning\n");
-    printf("2. Delete at the ending\n");
+    printf("2. Delete at the certain position\n");
     printf("3. Display the list\n");
     printf("4. Exit\n");
     while(1){
@@ -78,7 +96,9 @@ int main(){
                 insertBeg(&head,data);
                 break;
             case 2:
-                deleteEnd(&head);
+                printf("Enter the position to delete: ");
+                scanf("%d",&posn);
+                delete_nth(&head,posn);
                 break;
             case 3:
                 displayList(head);
