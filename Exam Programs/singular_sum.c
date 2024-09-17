@@ -1,26 +1,16 @@
-// Inserting element at the ending in the singular linked list
+// Summatation of the data in the singular linked list
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct Node{
     int data;
     struct Node *link;
 }node;
-void insertEnd(node **head,int data){
-    node *newnode,*ptr;
+void insertBeg(node **head,int data){
+    node *newnode;
     newnode = (node*)malloc(sizeof(node));
     newnode->data = data;
-    if(*head==NULL){
-        newnode->link = *head;
-        *head = newnode;
-    }
-    else{
-        ptr = *head;
-        while(ptr->link!=NULL)
-            ptr = ptr->link;
-        
-        newnode->link = ptr->link;
-        ptr->link = newnode;
-    }
+    newnode->link = *head;
+    *head = newnode;
 }
 void displayList(node *head){
     while(head!=NULL){
@@ -29,10 +19,25 @@ void displayList(node *head){
     }
     printf("NULL\n");
 }
+int SumData(node *head){
+    int sum;
+    node *ptr;
+    if(head==NULL)
+        return -1;
+    else{
+        ptr = head;
+        while(ptr!=NULL){
+            sum += ptr->data;
+            ptr = ptr->link;
+        }
+        return sum;
+    }
+}
 int main(){
     node *head = NULL;
-    int ch,data;
-    printf("1. Insert element at the ending\n");
+    int ch,data,sum;
+    printf("1. Enter element to insert at the beginning\n");
+    printf("2. Summatation of the data\n");
     printf("2. Display the list\n");
     printf("3. Exit\n");
     while(1){
@@ -42,13 +47,20 @@ int main(){
             case 1:
                 printf("Enter the element to insert: ");
                 scanf("%d",&data);
-                insertEnd(&head,data);
+                insertBeg(&head,data);
                 break;
             case 2:
+                sum = SumData(head);
+                if(sum==-1)
+                    puts("The list is empty.");
+                else
+                    printf("Summatation of the data in list: %d\n",sum);
+                break;
+            case 3:
                 printf("The list: ");
                 displayList(head);
                 break;
-            case 3:
+            case 4:
                 printf("Exiting.....\n");
                 return 0;
             default:

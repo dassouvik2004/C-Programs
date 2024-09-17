@@ -31,11 +31,12 @@ void displayPoly(int arr[],int size){
 	printf("\b ");
 }
 int main(){
-	int size,i;
-	printf("Enter the number of elements: ");
-	scanf("%d",&size);
-	int data[size];
+	int data[10],n,size,i;
+	printf("Enter the highest order of your polynomial: ");
+	scanf("%d",&n);
 	
+	size = n + 1;
+
 	for(i=0;i<size;i++){
 		data[i] = 0;
 	}

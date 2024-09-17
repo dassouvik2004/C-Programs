@@ -34,7 +34,7 @@ void displayList(node *head){
 int main(){
     node *head = NULL;
     int ch,data,posn;
-    printf("1. Enter element to insert at the certain position\n");
+    printf("1. Insert element at the certain position\n");
     printf("2. Display the list\n");
     printf("3. Exit\n");
     while(1){

@@ -22,7 +22,7 @@ void displayList(node *head){
 int main(){
     node *head = NULL;
     int ch,data;
-    printf("1. Enter element to insert at the beginning\n");
+    printf("1. Insert element at the beginning\n");
     printf("2. Display the list\n");
     printf("3. Exit\n");
     while(1){
