@@ -213,9 +213,31 @@ void physically_rev(node **head){
     *head = prev;
     printf("Reversing is completed in physically.\n");
 }
+int search_list(node *head,int data){
+    node *ptr;
+    int flag,i = 0;
+
+    if(head==NULL)
+        return -2;
+    else{
+        ptr = head;
+        while(ptr!=NULL){
+            if(ptr->data==data){
+                return i;
+                flag = 0;
+            }
+            else   
+                flag = 1;
+            i++;
+            ptr = ptr->link;
+        }
+        if(flag==1)
+            return -1;
+    }
+}
 int main(){
     node *head = NULL;
-    int ch,data,posn;
+    int ch,data,posn,search;
     printf("|MAIN MENU|\n");
     printf("---------------------------------------------------\n");
     printf("1. Insert element at the beginning\n");
@@ -231,7 +253,8 @@ int main(){
     printf("11. Delete element from any position.\n");
     printf("12. Display the list in reverse order using recursion.\n");
     printf("13. Reverse display the linked list\n");
-    printf("14. Exit\n");
+    printf("14. Searching the data from the data\n");
+    printf("15. Exit\n");
     printf("---------------------------------------------------\n");
     while(1){
         printf("Enter the operation: ");
@@ -295,6 +318,17 @@ int main(){
                 physically_rev(&head);
                 break;
             case 14:
+                printf("Enter the data to search: ");
+                scanf("%d",&data);
+                search = search_list(head,data);
+                if(search==-2)
+                    printf("List is empty\n");
+                else if(search==-1)
+                    printf("Element is not found.\n");
+                else  
+                    printf("Element is found in index no. %d\n",search);
+                break;
+            case 15:
                 printf("Exiting...\n");
                 return 0;
             default:
