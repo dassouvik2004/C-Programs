@@ -237,26 +237,26 @@ int search_list(node *head,int data){
 }
 int main(){
     node *head = NULL;
-    int ch,data,posn,search;
-    printf("|MAIN MENU|\n");
-    printf("---------------------------------------------------\n");
-    printf("1. Insert element at the beginning\n");
-    printf("2. Insert element at the ending\n");
-    printf("3. Insert element at the n-th position\n");
-    printf("4. Print the list\n");
-    printf("5. Count the number of node\n");
-    printf("6. Find the maximum data\n");
-    printf("7. Sum of the data in the list\n");
-    printf("8. Sorting the linked list.\n");
-    printf("9. Delete element at the beginning\n");
-    printf("10. Delete element at the ending.\n");
-    printf("11. Delete element from any position.\n");
-    printf("12. Display the list in reverse order using recursion.\n");
-    printf("13. Reverse display the linked list\n");
-    printf("14. Searching the data from the data\n");
-    printf("15. Exit\n");
-    printf("---------------------------------------------------\n");
-    while(1){
+    int ch,data,posn,search,run=1;
+    while(run){
+        printf("|MAIN MENU|\n");
+        printf("---------------------------------------------------\n");
+        printf("1. Insert element at the beginning\n");
+        printf("2. Insert element at the ending\n");
+        printf("3. Insert element at the n-th position\n");
+        printf("4. Print the list\n");
+        printf("5. Count the number of node\n");
+        printf("6. Find the maximum data\n");
+        printf("7. Sum of the data in the list\n");
+        printf("8. Sorting the linked list.\n");
+        printf("9. Delete element at the beginning\n");
+        printf("10. Delete element at the ending.\n");
+        printf("11. Delete element from any position.\n");
+        printf("12. Display the list in reverse order using recursion.\n");
+        printf("13. Reverse display the linked list\n");
+        printf("14. Searching the data from the data\n");
+        printf("15. Exit\n");
+        printf("---------------------------------------------------\n");
         printf("Enter the operation: ");
         scanf("%d",&ch);
         switch(ch){
@@ -329,8 +329,9 @@ int main(){
                     printf("Element is found in index no. %d\n",search);
                 break;
             case 15:
+                run = 0;
                 printf("Exiting...\n");
-                return 0;
+                break;
             default:
                 printf("Invalid operation. Please try again..\n");
         }

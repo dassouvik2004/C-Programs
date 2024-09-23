@@ -83,7 +83,7 @@ int main(){
     printf("1. Insert element at the beginning\n");
     printf("2. Insert element at the ending\n");
     printf("3. Insert element at the certain position\n");
-    printf("4. Dispplay the list\n");
+    printf("4. Display the list\n");
     printf("5. Reverse display the list\n");
     printf("6. Exit\n");
     while(1){
