@@ -194,6 +194,38 @@ void deleteAny(node **head,int data){
         }
     }
 }
+void delete_nth(node **head,int posn){
+    node *ptr;
+    if(posn<=0){
+        printf("Invalid position.Please try again\n");
+        return;
+    }
+    if(*head==NULL)
+        puts("NULL node. Deletion is not possible.\n");
+    else{
+        ptr = *head;
+        if(posn==1){
+            *head = ptr->link;
+            free(ptr);
+            printf("Successfully deleted the %d position element.\n",posn);
+        }
+        else{
+            int c;
+            for(c = 1; c<=posn-2 && ptr->link!=NULL;c++)
+                ptr = ptr->link;
+            
+            if(ptr->link==NULL)
+                puts("Invalid position. Please try again.\n");
+            else{
+                node *temp;
+                temp = ptr->link;
+                ptr->link = temp->link;
+                free(temp);
+                printf("Successfully deleted the %d position element.\n",posn);
+            }
+        }
+    }
+}
 void display_rev(node *head){
     node *ptr;
     if(head!=NULL){
@@ -237,7 +269,7 @@ int search_list(node *head,int data){
 }
 int main(){
     node *head = NULL;
-    int ch,data,posn,search,run=1;
+    int ch,data,posn,posn2,search,run=1;
     while(run){
         printf("|MAIN MENU|\n");
         printf("---------------------------------------------------\n");
@@ -251,11 +283,12 @@ int main(){
         printf("8. Sorting the linked list.\n");
         printf("9. Delete element at the beginning\n");
         printf("10. Delete element at the ending.\n");
-        printf("11. Delete element from any position.\n");
-        printf("12. Display the list in reverse order using recursion.\n");
-        printf("13. Reverse display the linked list\n");
-        printf("14. Searching the data from the data\n");
-        printf("15. Exit\n");
+        printf("11. Delete element from any position using data\n");
+        printf("12. Delete element from any position using position.\n");
+        printf("13. Display the list in reverse order using recursion.\n");
+        printf("14. Reverse display the linked list\n");
+        printf("15. Searching the data from the data\n");
+        printf("16. Exit\n");
         printf("---------------------------------------------------\n");
         printf("Enter the operation: ");
         scanf("%d",&ch);
@@ -311,13 +344,18 @@ int main(){
                 deleteAny(&head,data);
                 break;
             case 12:
+                printf("Enter the position to delete: ");
+                scanf("%d",&posn2);
+                delete_nth(&head,posn2);
+                break;
+            case 13:
                 display_rev(head);
                 printf("\n");
                 break;
-            case 13:
+            case 14:
                 physically_rev(&head);
                 break;
-            case 14:
+            case 15:
                 printf("Enter the data to search: ");
                 scanf("%d",&data);
                 search = search_list(head,data);
@@ -328,7 +366,7 @@ int main(){
                 else  
                     printf("Element is found in index no. %d\n",search);
                 break;
-            case 15:
+            case 16:
                 run = 0;
                 printf("Exiting...\n");
                 break;
