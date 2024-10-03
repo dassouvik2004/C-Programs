@@ -23,9 +23,8 @@ void insert() {
     if (q.rear == MAX - 1) {
         printf("\nQueue Overflow\n");
     } else {
-        if (q.front == -1) { // Queue is initially empty
+        if (q.front == -1) // Queue is initially empty
             q.front = 0;
-        }
         q.list[++q.rear] = num;
     }
 }

@@ -1,9 +1,9 @@
-/* A Simple Queue*/
+// A Simple Queue
 #include <stdio.h>
 #define SIZE 6
 int item[SIZE], rear = -1, front = -1;
 void enQueue(int value){
-	if(rear == SIZE -1)
+	if(rear == SIZE - 1)
 		printf("Queue is full.\n");
 	else{
 		if(front == -1)
@@ -30,7 +30,7 @@ void display(){
 		printf("Queue is empty.\n");
 	else{
 	int i;
-	printf("Queue ELements are: ");
+	printf("Queue Elements are: ");
 	for(i=front;i<=rear;i++)
 		printf("%d ",item[i]);
 	}
