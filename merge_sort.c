@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <conio.h>
-#define SIZE 100
+#define SIZE 10
 void merge(int arr[],int beg,int mid,int end){
-    int i = beg, j = mid+1, index = beg, temp[SIZE], k;
-    while((i<=mid) && (j<=end)){
-        if((arr[i]) < (arr[j])){
+    int i = beg, j = mid + 1, index = beg, temp[SIZE], k;
+    while(i<=mid && j<=end){
+        if(arr[i]>arr[j]){
             temp[index] = arr[i];
             i++;
         }
@@ -41,15 +40,15 @@ void merge_sort(int arr[],int beg,int end){
     }
 }
 int main(){
-    int arr[SIZE],i,n;
-    printf("Enter the number of elements in the array: ");
+    int i,n,arr[SIZE];
+    printf("Enter the number of elements of the array: ");
     scanf("%d",&n);
     printf("Enter the elements of the array: ");
     for(i=0;i<n;i++)
         scanf("%d",&arr[i]);
     merge_sort(arr,0,n-1);
-    printf("\n The sorted array is: \n");
-    for(i=0;i<n;i++)
-        printf("%d\t",arr[i]);
+    printf("The sorting array is: \n");
+    for(i=0;i<n;i++)    
+        printf("%d ",arr[i]);
     return 0;
 }
