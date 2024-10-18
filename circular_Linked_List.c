@@ -105,29 +105,46 @@ void deleteEnd(node **head){
         printf("Succssfully deleted the last node.\n");
     }
 }
-void delete_nth(node **head,int val){
+int delete_nth(node **head,int val){
     node *ptr = *head;
-    if(*head==NULL)
+    if(*head==NULL){
         puts("NULL node. Deletion is not possible.\n");
+        return -1;
+    }
     else{
-        if(ptr->link == ptr && ptr->data==val){
-            *head = NULL;
-            free(ptr);
+        if(ptr->data == val){
+            if(ptr->link==ptr){
+                *head = NULL;
+                free(ptr);
+            }
+            else{
+                while(ptr->link!=*head)
+                    ptr = ptr->link;
+                
+                ptr->link = (*head)->link;
+                free(*head);
+                *head = ptr->link;
+            }
+            printf("Successfully deleted the given element...\n");
         }
         else{
-            node *prev;
-            while(ptr->link!=*head){
+            node *prev = *head;
+            ptr = ptr->link;
+            while(ptr!=*head){
                 if(ptr->data==val)
                     break;
                 prev = ptr;
                 ptr = ptr->link;
             }
-            if(ptr==*head)
+            if(ptr==*head){
                 printf("Element is not found.\n");
+                return -1;
+            }
             else{
                 prev->link = ptr->link;
                 free(ptr);
             }
+            printf("Successfully deleted the given element...\n");   
         }
     }
 }
