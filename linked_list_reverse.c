@@ -4,21 +4,15 @@ typedef struct Node{
     int data;
     struct Node *link;
 }node;
-void sorting(node **head){
-    int temp;
-    node *current  = *head, *next;
-    while(current!=NULL){
-        next = current->link;
-        while(next!=NULL){
-            if(current->data>next->data){
-                temp = current->data;
-                current->data = next->data;
-                next->data = temp;
-            }
-            next = next->link;
-        }
-        current = current->link;
+void revList(node **head){
+    node *prev = NULL, *cur = *head, *next = NULL;
+    while(cur!=NULL){
+        next = cur->link;
+        cur->link = prev;
+        prev = cur;
+        cur = next;
     }
+    *head = prev;
 }
 void printList(node *head){
     while(head!=NULL){
@@ -34,9 +28,9 @@ int main(){
     node *second = (node*)malloc(sizeof(node));
     node *third = (node*)malloc(sizeof(node));
 
-    first->data = 15;
+    first->data = 5;
     second->data = 10;
-    third->data = 25;
+    third->data = 15;
 
     first->link = second;
     second->link = third;
@@ -44,8 +38,12 @@ int main(){
 
     head = first;
 
-    sorting(&head);
+    printf("Before reversing: \n");
+    printList(head);
 
+    revList(&head);
+
+    printf("After reversing: \n");
     printList(head);
 
     return 0;
