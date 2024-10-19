@@ -38,17 +38,20 @@ int main(){
     node *second = (node*)malloc(sizeof(node));
     node *third = (node*)malloc(sizeof(node));
     node *fourth = (node*)malloc(sizeof(node));
+    node *fifth = (node*)malloc(sizeof(node));
 
     first->data = 5;
     second->data = 10;
     third->data = 5;
     fourth->data = 15;
+    fifth->data = 10;
 
 
     first->link = second;
     second->link = third;
     third->link = fourth;
-    fourth->link = NULL;
+    fourth->link = fifth;
+    fifth->link = NULL;
 
     head = first;
 
