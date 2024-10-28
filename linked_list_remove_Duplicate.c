@@ -1,3 +1,4 @@
+// Create a singular linked list and remove duplicate element from the list
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct Node{

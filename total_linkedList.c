@@ -1,3 +1,4 @@
+// All operations of singular linked list
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct node{
@@ -71,29 +72,41 @@ int countList(node *head){
     }
     printf("The total number of nodes is %d\n",count);
 }
-int maxNode(node *head){
-    node *ptr,*temp;
-    ptr = NULL;
-    int max;
-    ptr = head;
-    if(head==NULL){
+node* maxNode(node *head) {
+    if (head == NULL) {
         printf("List is empty.\n");
-        return 0;
+        return NULL;
     }
-    else{
-        ptr = head;
-        max = ptr->data;
+
+    node *ptr = head;
+    node *maxNode = head;
+
+    while (ptr != NULL) {
+        if (ptr->data > maxNode->data)
+            maxNode = ptr;
         ptr = ptr->link;
-        while(ptr!=NULL){
-            if(ptr->data>max){
-                max = ptr->data;
-                temp = ptr;
-            }
-            ptr = ptr->link;
-        }
     }
-    printf("Maximum data of list is %d and address of the maximum data of list is %d\n",max,temp);
+
+    return maxNode;
 }
+node* minNode(node *head){
+    if (head == NULL){
+        printf("List is empty.\n");
+        return NULL;
+    }
+
+    node *ptr = head;
+    node *minNode = head;
+
+    while (ptr != NULL) {
+        if (ptr->data < minNode->data) 
+            minNode = ptr;
+        ptr = ptr->link;
+    }
+
+    return minNode;
+}
+
 int sumNode(node *head){
     node *ptr;
     int sum=0;
@@ -110,6 +123,7 @@ int sumNode(node *head){
         printf("Summation of all data: %d\n",sum);
     }
 }
+
 int sortingList(node **head){
     int temp;
     node *current, *next;
@@ -268,7 +282,7 @@ int search_list(node *head,int data){
     }
 }
 int main(){
-    node *head = NULL;
+    node *head = NULL,*max,*min;
     int ch,data,posn,posn2,search,run=1;
     while(run){
         printf("|MAIN MENU|\n");
@@ -279,16 +293,17 @@ int main(){
         printf("4. Print the list\n");
         printf("5. Count the number of node\n");
         printf("6. Find the maximum data\n");
-        printf("7. Sum of the data in the list\n");
-        printf("8. Sorting the linked list.\n");
-        printf("9. Delete element at the beginning\n");
-        printf("10. Delete element at the ending.\n");
-        printf("11. Delete element from any position using data\n");
-        printf("12. Delete element from any position using position.\n");
-        printf("13. Display the list in reverse order using recursion.\n");
-        printf("14. Reverse display the linked list\n");
-        printf("15. Searching the data from the data\n");
-        printf("16. Exit\n");
+        printf("7. Find the minimum data\n");
+        printf("8. Sum of the data in the list\n");
+        printf("9. Sorting the linked list.\n");
+        printf("10. Delete element at the beginning\n");
+        printf("11. Delete element at the ending.\n");
+        printf("12. Delete element from any position using data\n");
+        printf("13. Delete element from any position using position.\n");
+        printf("14. Display the list in reverse order using recursion.\n");
+        printf("15. Reverse display the linked list\n");
+        printf("16. Searching the data from the data\n");
+        printf("17. Exit\n");
         printf("---------------------------------------------------\n");
         printf("Enter the operation: ");
         scanf("%d",&ch);
@@ -322,40 +337,45 @@ int main(){
                 countList(head);
                 break;
             case 6:
-                maxNode(head);
+                max = maxNode(head);
+                printf("Maximum data is %d and its address is %d\n",max->data,max);
                 break;
             case 7:
-                sumNode(head);
+                min = minNode(head);
+                printf("Minimum data is %d and its address is %d\n",min->data,min);
                 break;
             case 8:
+                sumNode(head);
+                break;
+            case 9:
                 sortingList(&head);
                 printf("Sorting list: ");
                 displayList(head);
                 break;
-            case 9:
+            case 10:
                 deleteBegin(&head);
                 break;
-            case 10:
+            case 11:
                 deleteEnd(&head);
                 break;
-            case 11:
+            case 12:
                 printf("Enter the value to delete: ");
                 scanf("%d",&data);
                 deleteAny(&head,data);
                 break;
-            case 12:
+            case 13:
                 printf("Enter the position to delete: ");
                 scanf("%d",&posn2);
                 delete_nth(&head,posn2);
                 break;
-            case 13:
+            case 14:
                 display_rev(head);
                 printf("\n");
                 break;
-            case 14:
+            case 15:
                 physically_rev(&head);
                 break;
-            case 15:
+            case 16:
                 printf("Enter the data to search: ");
                 scanf("%d",&data);
                 search = search_list(head,data);
@@ -366,7 +386,7 @@ int main(){
                 else  
                     printf("Element is found in index no. %d\n",search);
                 break;
-            case 16:
+            case 17:
                 run = 0;
                 printf("Exiting...\n");
                 break;
